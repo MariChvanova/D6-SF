@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Управление подписками</h1>
+
+<h2>Категории</h2>
+<ul>
+    {% for category in categories %}
+    <li>
+        {{ category.name }}
+        {% if category.id in user_subscriptions %}
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="category_id" value="{{ category.id }}">
+                <input type="hidden" name="action" value="unsubscribe">
+                <button type="submit" class="btn btn-danger btn-sm">Отписаться</button>
+            </form>
+        {% else %}
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="category_id" value="{{ category.id }}">
+                <input type="hidden" name="action" value="subscribe">
+                <button type="submit" class="btn btn-success btn-sm">Подписаться</button>
+            </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

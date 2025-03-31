@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Еженедельная рассылка</title>
+</head>
+<body>
+    <h1>Новые статьи в категории {{ category.name }} за неделю</h1>
+
+    <ul>
+        {% for post in posts %}
+        <li>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.preview }}</p>
+            <a href="http://127.0.0.1:8000{{ post.get_absolute_url }}">Читать полностью</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
